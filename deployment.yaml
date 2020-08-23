@@ -12,6 +12,22 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          env:
+          - name: POSTGRES_URL
+            valueFrom:
+              secretKeyRef:
+                name: postgres-sec
+                key: url
+          - name: POSTGRES_USR
+            valueFrom:
+              secretKeyRef:
+                name: postgres-sec
+                key: username
+          - name: POSTGRES_PW
+            valueFrom:
+              secretKeyRef:
+                name: postgres-sec
+                key: password
           envFrom:
             - configMapRef:
                 name: spring-configmap-env
