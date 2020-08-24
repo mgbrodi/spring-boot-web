@@ -3,8 +3,10 @@ apiVersion: v1
 metadata:
   name: service
 spec:
-  type: LoadBalancer
+  #type: LoadBalancer
   sessionAffinity: None
+  selector:
+    app.kubernetes.io/name: spring-sample-app
   ports:
     - port: 80
       targetPort: 8080
