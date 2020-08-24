@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollouts-demo
+  labels:
+    app: rollouts-demo
+spec:
+  replicas: 1
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {}
+      - setWeight: 40
+      - pause: {duration: 10}
+      - setWeight: 60
+      - pause: {duration: 10}
+      - setWeight: 80
+      - pause: {duration: 10}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollouts-demo
+  template:
+    metadata:
+      labels:
+        app: rollouts-demo
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: harbor.marygabry.name/spring-sample-app/spring-sample-app-tbs@IMG_SHA
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-sec
+              key: url
+        - name: POSTGRES_USR
+          valueFrom:
+            secretKeyRef:
+              name: postgres-sec
+              key: username
+        - name: POSTGRES_PW
+          valueFrom:
+            secretKeyRef:
+              name: postgres-sec
+              key: password
+        envFrom:
+        - configMapRef:
+            name: spring-configmap-env
+        livenessProbe:
+          httpGet:
+            path: /actuator/info
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
