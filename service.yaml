@@ -1,13 +1,13 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: service
+  name: spring2020-service
 spec:
-  sessionAffinity: None
+  ports:
+  - name: 80-8080
+    port: 80
+    targetPort: 8080
   selector:
     name: app
-  ports:
-  - port: 80
-    targetPort: 8080
   type: ClusterIP
   
