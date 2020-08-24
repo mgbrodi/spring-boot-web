@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: harbor.marygabry.name/spring-sample-app/spring-sample-app-tbs@IMG_SHA
+        image: harbor.marygabry.name/spring-sample-app/spring-sample-app-tbs@sha256:43996277ad32dc9b12bad4edb5fe7ee6818ac8c1a2c829035716f66d5aa459fa
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
