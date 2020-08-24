@@ -1,9 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: rollouts-demo
-  labels:
-      name: app
+  name: app
 spec:
   replicas: 1
   strategy:
@@ -18,16 +16,10 @@ spec:
       - setWeight: 80
       - pause: {duration: 10}
   revisionHistoryLimit: 2
-  selector:
-    matchLabels:
-      name: app
   template:
-    metadata:
-      labels:
-        name: app
     spec:
       containers:
-      - name: rollouts-demo
+      - name: app
         image: harbor.marygabry.name/spring-sample-app/spring-sample-app-tbs@sha256:43996277ad32dc9b12bad4edb5fe7ee6818ac8c1a2c829035716f66d5aa459fa
         imagePullPolicy: IfNotPresent
         ports:
