@@ -4,6 +4,8 @@ metadata:
   name: service
 spec:
   sessionAffinity: None
+  selector:
+    name: app
   ports:
   - port: 80
     targetPort: 8080
