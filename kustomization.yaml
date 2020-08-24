@@ -1,5 +1,6 @@
-# commonLabels:
+commonLabels:
 #   app.kubernetes.io/name: spring-sample-app
+  name: app
 resources:
   - rollout.yaml
   - service.yaml
