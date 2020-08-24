@@ -2,8 +2,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: service
-  labels:
-    name: app
 spec:
   sessionAffinity: None
   ports:
