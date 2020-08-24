@@ -2,13 +2,14 @@ kind: Service
 apiVersion: v1
 metadata:
   name: spring2020-service
+  labels:
+    app: rollouts-demo
 spec:
-  #type: LoadBalancer
-  type: ClusterIP
   sessionAffinity: None
-  selector:
-    app.kubernetes.io/name: spring-sample-app
   ports:
-    - port: 80
-      targetPort: 8080
-
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: rollouts-demo
+  type: ClusterIP
+  
