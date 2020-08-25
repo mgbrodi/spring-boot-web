@@ -20,6 +20,9 @@ spec:
     matchLabels:
       name: app
   template:
+    metadata:
+      labels:
+        name: app
     spec:
       containers:
       - name: app
