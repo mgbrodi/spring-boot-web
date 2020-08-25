@@ -4,9 +4,6 @@ metadata:
   name: app
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      name: app
   strategy:
     canary:
       steps:
@@ -19,6 +16,9 @@ spec:
       - setWeight: 80
       - pause: {duration: 10}
   revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      name: app
   template:
     spec:
       containers:
