@@ -5,7 +5,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    name: app
+    matchLabels:
+      name: app
   strategy:
     canary:
       steps:
