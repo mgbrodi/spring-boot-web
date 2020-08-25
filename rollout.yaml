@@ -4,6 +4,8 @@ metadata:
   name: app
 spec:
   replicas: 1
+  selector:
+    name: app
   strategy:
     canary:
       steps:
