@@ -3,18 +3,20 @@ kind: Rollout
 metadata:
   name: app
 spec:
-  replicas: 5
+  replicas: 4
   strategy:
     canary:
+      canaryService: spring2020-canary-svc
+      stableService: spring2020-stable-svc
+      trafficRouting:
+        istio:
+          virtualService:
+            name: spring2020-argosvc
+            routes:
+            - primary # At least one route is required
       steps:
-      - setWeight: 20
+      - setWeight: 5
       - pause: {}
-      - setWeight: 40
-      - pause: {duration: 10}
-      - setWeight: 60
-      - pause: {duration: 10}
-      - setWeight: 80
-      - pause: {duration: 10}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
