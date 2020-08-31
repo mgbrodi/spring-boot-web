@@ -2,4 +2,4 @@ commonLabels:
   name: app
 resources:
   - rollout.yaml
-  - service.yaml
+  - services.yaml
